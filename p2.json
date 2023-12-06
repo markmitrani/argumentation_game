@@ -1,0 +1,12 @@
+
+{  
+    "0": {"attacks": ["1"], "attacked": ["1", "2", "3", "5"]},
+    "1": {"attacks": ["0"], "attacked": ["0", "3", "5"]},
+    "2": {"attacks": ["0"], "attacked": []},
+    "3": {"attacks": ["0", "1"], "attacked": ["4"]},
+    "4": {"attacks": ["3"], "attacked": []},
+    "5": {"attacks": ["0", "1"], "attacked": ["6"]},
+    "6": {"attacks": ["5"], "attacked": []}
+}
+   
+
