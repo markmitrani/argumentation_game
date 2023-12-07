@@ -1,4 +1,3 @@
-
 from itertools import chain, combinations
 
 def all_subsets(ss):
@@ -19,7 +18,7 @@ def conflict_free_sets_containing_arg(framework, argument):
     conflict_free_sets = set()
     
     for subset in all_subsets(all_args):
-        
+
         if argument in subset and is_conflict_free(subset, framework):
             conflict_free_sets.add(frozenset(subset))
 
@@ -38,16 +37,13 @@ if __name__ == '__main__':
         '4': {'attacks': ['4'], 'attacked': ['3', '4']}
     }
     
-    # all subsets
     print("All subsets:")
     print(list(all_subsets(framework.keys())))
 
-    # Check if a subset is conflict-free
     subset = ('1', '4')
     print(f"Is the subset {subset} conflict-free?")
     print(is_conflict_free(("1","4"), framework))
 
-    # Test the function
     print("Conflict-free sets containing the argument:")
     cf_set = conflict_free_sets_containing_arg(framework, '1')
 
