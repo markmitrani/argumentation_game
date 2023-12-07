@@ -1,5 +1,7 @@
 from admissible import find_admissible_sets
 from cf_single_argument import conflict_free_sets_containing_arg
+from preferred import find_preferred_sets
+
 
 def credulous_acceptance(framework, argument):
     pass # TODO
@@ -20,7 +22,13 @@ if __name__=='__main__':
     print(f"Conflict-free sets containing the argument: {arg}")
     cf_sets = conflict_free_sets_containing_arg(framework, arg)
     print(cf_sets)
+
     print("-"*50)
     print(f"Admissible sets containing the argument: {arg}")
     admissible_sets = find_admissible_sets(cf_sets, framework)
     print(admissible_sets)
+
+    print("-"*50)
+    print(f"Preferred sets containing the argument: {arg}")
+    preferred_sets = find_preferred_sets(admissible_sets)
+    print(preferred_sets)
