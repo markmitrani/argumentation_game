@@ -1,7 +1,19 @@
 from itertools import chain, combinations
 
 def all_subsets(ss):
-    """ Generate all subsets of a set. """
+    """ Generate all subsets of a set.
+
+        -the combination function generates all subsets of a given size
+        -the map function applies the combination function to all sizes
+        -chain combines all the subsets of different sizes
+        -the star operator unpacks the chain object into a list of arguments for the set constructor
+
+        Parameters:
+        ss (iterable): An iterable (like a list or set) for which all possible subsets need to be generated.
+
+        Returns:
+        itertools.chain: An iterator that yields all subsets of 'ss'. Each subset is represented as a tuple.
+    """
     return chain(*map(lambda x: combinations(ss, x), range(0, len(ss)+1)))
 
 def is_conflict_free(subset, framework):
@@ -39,6 +51,9 @@ if __name__ == '__main__':
     
     print("All subsets:")
     print(list(all_subsets(framework.keys())))
+    for subset in all_subsets(framework.keys()):
+        assert type(subset) == tuple, "all_subsets should return tuples"
+        break
 
     subset = ('1', '4')
     print(f"Is the subset {subset} conflict-free?")
