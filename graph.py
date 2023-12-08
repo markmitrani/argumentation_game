@@ -1,4 +1,27 @@
 def convert_data_structure(input_data):
+    """ 
+    # Example input data
+    input_data = {
+        "Arguments": {
+            "0": "a",
+            "1": "b",
+            "2": "c",
+            "3": "d",
+            "4": "e"
+        },
+        "Attack Relations": [
+            ["0", "1"],
+            ["2", "1"],
+            ["2", "3"],
+            ["3", "2"],
+            ["3", "4"],
+            ["4", "4"]
+        ]
+    }
+
+    # Convert the data
+
+    """
     #  dictionary for the new structure
     converted = {}
 
@@ -20,64 +43,43 @@ def convert_data_structure(input_data):
 
     return converted
 
+if __name__ == '__main__':
+    
 
-""" 
-# Example input data
-input_data = {
-    "Arguments": {
-        "0": "a",
-        "1": "b",
-        "2": "c",
-        "3": "d",
-        "4": "e"
-    },
-    "Attack Relations": [
-        ["0", "1"],
-        ["2", "1"],
-        ["2", "3"],
-        ["3", "2"],
-        ["3", "4"],
-        ["4", "4"]
-    ]
-}
-
-# Convert the data
-
-"""
-input_data = {
-    "Arguments": {
-        "0": "a",
-        "1": "b",
-        "2": "c",
-        "3": "d",
-        "4": "e"
-    },
-    "Attack Relations": [
-        [
-            "0",
-            "1"
-        ],
-        [
-            "2",
-            "1"
-        ],
-        [
-            "2",
-            "3"
-        ],
-        [
-            "3",
-            "2"
-        ],
-        [
-            "3",
-            "4"
-        ],
-        [
-            "4",
-            "4"
+    input_data = {
+        "Arguments": {
+            "0": "a",
+            "1": "b",
+            "2": "c",
+            "3": "d",
+            "4": "e"
+        },
+        "Attack Relations": [
+            [
+                "0",
+                "1"
+            ],
+            [
+                "2",
+                "1"
+            ],
+            [
+                "2",
+                "3"
+            ],
+            [
+                "3",
+                "2"
+            ],
+            [
+                "3",
+                "4"
+            ],
+            [
+                "4",
+                "4"
+            ]
         ]
-    ]
-}
-converted_data = convert_data_structure(input_data)
-print(converted_data)
+    }
+    converted_data = convert_data_structure(input_data)
+    print(converted_data)

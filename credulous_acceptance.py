@@ -99,9 +99,9 @@ def credulous_acceptance_from_file(path_to_framework, argument):
     # load json
     with open(path_to_framework, "r") as file:
         input_data = json.load(file)
-        print(type(input_data))
+        #print(type(input_data))
         #print(input_data)
-        print("Argumentation framework loaded.")
+        #print("Argumentation framework loaded.")
 
     # Convert the dictionary to have the attackers and attacked for each argument    
     framework = convert_data_structure(input_data)
@@ -140,5 +140,5 @@ if __name__ == '__main__':
         
         credulous_acceptance_from_file(file, argument)
     
-    print("-"*50)
-    print("-"*50)
+        print("-"*50)
+        print("-"*50)
