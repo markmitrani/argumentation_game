@@ -13,17 +13,33 @@ def argument_contained(sets, argument):
             return True
     return False
 
-if __name__=='__main__':
-    arg = '1'
-    framework = {
-        '0': {'attacks': ['1'], 'attacked': ['1']},
-        '1': {'attacks': ['0'], 'attacked': ['0', '2']},
-        '2': {'attacks': ['1', '3'], 'attacked': ['3']},
-        '3': {'attacks': ['2', '4'], 'attacked': ['2']},
-        '4': {'attacks': ['4'], 'attacked': ['3', '4']}
-    }
-    
+def convert_data_structure(input_data):
+    converted = {}
+    for attack in input_data["Attack Relations"]:
+        attacker, attacked = attack
+        if attacker not in converted:
+            converted[attacker] = {"attacks": [], "attacked": []}
+        if attacked not in converted:
+            converted[attacked] = {"attacks": [], "attacked": []}
+        converted[attacker]["attacks"].append(attacked)
+        converted[attacked]["attacked"].append(attacker)
+    return converted
 
+if __name__ == '__main__':
+    arg = '1'
+
+    # Define the input data for the attack relations
+    input_data = {
+        "Attack Relations": [
+            ('0', '1'), 
+            ('1', '0'), ('1', '2'),
+            ('2', '1'), ('2', '3'),
+            ('3', '2'), ('3', '4'),
+            ('4', '3'), ('4', '4')
+        ]
+    }
+    framework = convert_data_structure(input_data)
+    
     print("-"*50)
     print("Conflict-free sets:")
     cf_sets = conflict_free_sets_containing_arg(framework, arg)
