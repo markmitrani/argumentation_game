@@ -109,7 +109,6 @@ def credulous_acceptance_from_file(path_to_framework, argument):
     credulous_acceptance(framework, argument)
 
 
-    
 
 def argument_contained(sets, argument):
     for set_ in sets:
@@ -118,8 +117,10 @@ def argument_contained(sets, argument):
     return False
 
 
+
 if __name__ == '__main__':
-    argument = '1'
+    # List of arguments to check
+    arguments_to_check = ['1', '2', '3', '4', '5', '6']
 
     # get the path of the folder containing the frameworks
     folder_path = os.path.join(os.path.dirname(__file__), 'frameworks')
@@ -131,14 +132,15 @@ if __name__ == '__main__':
     files = [file for file in files if file.endswith(".json")]
 
     for file in files:
-        
         # get the name of the file
         filename = os.path.basename(file)
         
-        print(f"Credulous acceptance for {filename}:")
-        print("")
+        # Process each argument
+        for argument in arguments_to_check:
+            print(f"Credulous acceptance for argument {argument} in {filename}:")
+            print("")
+            
+            credulous_acceptance_from_file(file, argument)
         
-        credulous_acceptance_from_file(file, argument)
-    
-        print("-"*50)
+            print("-"*50)
         print("-"*50)
