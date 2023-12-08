@@ -28,13 +28,12 @@ def conflict_free_sets_containing_arg(framework, argument):
     """ Find all conflict-free sets containing the specified argument. """
     all_args = set(framework.keys())
     conflict_free_sets = set()
-    
+
     for subset in all_subsets(all_args):
 
-        if argument in subset and is_conflict_free(subset, framework):
+        if is_conflict_free(subset, framework):
             conflict_free_sets.add(frozenset(subset))
 
-    
     return conflict_free_sets
 
 

@@ -9,8 +9,9 @@ def is_defended(element, set_, framework):
 
     for attacker in attackers:
         # Check if the attacker is in the set
-        if attacker in set_:
-            assert False, "Internal attacks within the set"
+        # if attacker in set_:
+        #     assert False, "Internal attacks within the set"
+        # -----Commented out since we since we use this function also to check if an argument outside the set is defended by it, not if a set is admissible----
         
         # Check if another node within the set attacks the attacker
         if any(attacker in framework[element]['attacks'] for element in set_):
