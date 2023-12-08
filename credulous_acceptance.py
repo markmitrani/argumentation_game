@@ -2,6 +2,7 @@ from admissible import find_admissible_sets
 from conflict_free import conflict_free_sets_containing_arg
 from preferred import find_preferred_sets
 from complete_and_grounded import get_complete_sets, get_grounded_sets
+from stable import find_stable_extensions
 
 
 def credulous_acceptance(framework, argument):
@@ -42,7 +43,7 @@ if __name__ == '__main__':
     
     print("-"*50)
     print("Conflict-free sets:")
-    cf_sets = conflict_free_sets_containing_arg(framework, arg)
+    cf_sets = conflict_free_sets_containing_arg(framework)
     print(cf_sets)
     is_arg_contained = argument_contained(cf_sets, arg)
     if is_arg_contained:
@@ -60,6 +61,17 @@ if __name__ == '__main__':
         print(f"{arg} is contained in at least one admissible set")
     else:
         print(f"{arg} is not contained in any admissible set")
+
+    print("-"*50)
+    print("Stable extensions:")
+    stable_extensions = find_stable_extensions(admissible_sets, framework)
+    print(stable_extensions)
+    is_arg_contained = argument_contained(stable_extensions, arg)
+    if is_arg_contained:
+        print(f"{arg} is contained in at least one stable extension")
+    else:
+        print(f"{arg} is not contained in any stable extension")
+
 
     print("-"*50)
     print("Preferred sets:")
@@ -90,4 +102,6 @@ if __name__ == '__main__':
         print(f"{arg} is contained in at least one grounded set")
     else:
         print(f"{arg} is not contained in any grounded set")
+
+
 
