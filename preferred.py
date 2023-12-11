@@ -4,7 +4,7 @@ def is_subset_of_any(set_, sets):
 
 def find_preferred_sets(admissible_sets):
     preferred_sets = set()
-    # Find preferred (we can also say max admissible) sets check each set
+    # Find preferred (we can also say max admissible) sets
     for set_ in admissible_sets:
         if not is_subset_of_any(set_, admissible_sets):
             preferred_sets.add(set_)
