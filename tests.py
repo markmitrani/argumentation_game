@@ -41,7 +41,7 @@ def test_over_all_files():
 def get_computation_times(file):
 
     with cProfile.Profile() as pr:
-        credulous_acceptance_from_file(file)
+        credulous_acceptance_from_file(file, argument='0')
 
     ps = pstats.Stats(pr)
     ps.precision = 10 
@@ -65,13 +65,13 @@ def get_computation_times(file):
                 continue
 
 
-            print(f"{key[-1]}: ", f"total calls: {cc}, Avarage time: {ct/cc}")
+            print(f"{key[-1]}: ", f"total calls: {cc}, Cumulative time: {ct/cc}")
 
-            computation_times[key[-1]] = (cc, ct/cc)
+            computation_times[key[-1]] = (cc, ct)
     
     return computation_times
 if __name__ == '__main__':
-    #test_over_all_files()
-    get_computation_times(get_framework_files()[0])
+    test_over_all_files()
+    #get_computation_times(get_framework_files()[0])
     
     
