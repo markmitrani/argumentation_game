@@ -59,7 +59,7 @@ def credulous_acceptance(framework, argument = None, labels = None):
    
     for argument in arguments:
         is_arg_contained = argument_contained(cf_sets, argument)
-        arg_str = labels[argument] if labels is not None else argument
+        arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
         if is_arg_contained:
             print(f"{arg_str} is contained in at least one conflict-free set")
         else:
@@ -72,7 +72,7 @@ def credulous_acceptance(framework, argument = None, labels = None):
     
     for argument in arguments:
         is_arg_contained = argument_contained(admissible_sets, argument)
-        arg_str = labels[argument] if labels is not None else argument
+        arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
         if is_arg_contained:
             print(f"{arg_str} is credously accepted w.r.t. the admissible semantics")
         else:
@@ -85,7 +85,7 @@ def credulous_acceptance(framework, argument = None, labels = None):
     
     for argument in arguments:
         is_arg_contained = argument_contained(stable_extensions, argument)
-        arg_str = labels[argument] if labels is not None else argument
+        arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
         if is_arg_contained:
             print(f"{arg_str} is credously accepted w.r.t. the stable semantics")
         else:
@@ -99,7 +99,7 @@ def credulous_acceptance(framework, argument = None, labels = None):
   
     for argument in arguments:
         is_arg_contained = argument_contained(preferred_sets, argument)
-        arg_str = labels[argument] if labels is not None else argument
+        arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
         if is_arg_contained:
             
             print(f"{arg_str} is credously accepted w.r.t. the preferred semantics")
@@ -113,7 +113,7 @@ def credulous_acceptance(framework, argument = None, labels = None):
     is_arg_contained = argument_contained(complete_sets, argument)
     for argument in arguments:
         is_arg_contained = argument_contained(preferred_sets, argument)
-        arg_str = labels[argument] if labels is not None else argument
+        arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
         if is_arg_contained:
             print(f"{arg_str} is credously accepted w.r.t. the complete semantics")
         else:
@@ -126,7 +126,8 @@ def credulous_acceptance(framework, argument = None, labels = None):
     is_arg_contained = argument_contained(grounded_set, argument)
     for argument in arguments:
         is_arg_contained = argument_contained(preferred_sets, argument)
-        arg_str = labels[argument] if labels is not None else argument
+        arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
+        
         if is_arg_contained:
             print(f"{arg_str} is credously accepted w.r.t. the grounded semantics")
         else:

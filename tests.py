@@ -71,6 +71,7 @@ def get_computation_times(file):
     
     return computation_times
 if __name__ == '__main__':
+    
     test_over_all_files()
     #get_computation_times(get_framework_files()[0])
     
