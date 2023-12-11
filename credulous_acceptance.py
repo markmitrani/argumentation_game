@@ -7,7 +7,7 @@ from stable import get_stable_extensions
 from graph import convert_data_structure
 import json
 import os
-
+import sys
 
 def credulous_acceptance(framework, argument = None, labels = None):
     """
@@ -26,6 +26,20 @@ def credulous_acceptance(framework, argument = None, labels = None):
         }                  
 
         argument (str): The argument to be evaluated.
+        
+        if None, all arguments will be evaluated.
+
+        labels (dict): The labels of the arguments.
+
+        It should be in the following format:
+        {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            '3': 'd',
+            '4': 'e'
+        }
+        Where the key is the argument identifier and the value is the label.
 
     Returns:
         None
@@ -35,6 +49,9 @@ def credulous_acceptance(framework, argument = None, labels = None):
 
     if argument is not None:
         arguments = [argument]
+        if argument not in framework:
+            raise(f"Argument id {argument} does not exist in the framework.")
+            
 
     print("Conflict-free sets:")
     cf_sets = get_conflict_free_sets(framework)
@@ -116,11 +133,12 @@ def credulous_acceptance(framework, argument = None, labels = None):
             print(f"{arg_str} is not credously accepted w.r.t. the grounded semantics")
 
 def credulous_acceptance_from_file(path_to_framework, argument = None, include_labels = True):
-    # Define the input data for the attack relations
-    if not path_to_framework.endswith(".json"):
-        print("Please enter a valid json file")
-        return
 
+    if not os.path.exists(path_to_framework):
+        raise("Please enter a valid json file, the file you provided does not exist.")
+    if not path_to_framework.endswith(".json"):
+        raise("Please enter a valid json file, the file you provided is not a json file.")
+    
     # load json
     with open(path_to_framework, "r") as file:
         input_data = json.load(file)
@@ -148,9 +166,42 @@ def argument_contained(sets, argument):
             return True
     return False
 
+def handle_cli_call(args):
+    if len(args) != 2:
+        print("Please enter the correct number of arguments.")
+        print("Usage: python credulous_acceptance.py FULL_PATH_TO_FRAMEWORK ARGUMENT_IDENTIFIER")
+        sys.exit(1)
+
+    framework_path = args[0]
+    argument_id = args[1]
+
+    if not os.path.exists(framework_path):
+        print(f"File {framework_path} does not exist.")
+        print("Usage: python credulous_acceptance.py FULL_PATH_TO_FRAMEWORK ARGUMENT_IDENTIFIER")
+        sys.exit(1)
+
+    if not framework_path.endswith(".json"):
+        print("The file provided is not a json file.")
+        print("You provided: ", framework_path)
+        print("Usage: python credulous_acceptance.py FULL_PATH_TO_FRAMEWORK ARGUMENT_IDENTIFIER")
+        sys.exit(1)
+    
+    return framework_path, argument_id
 
 if __name__ == '__main__':
-    # List of arguments to check
-    #arguments_to_check = ['1', '2', '3', '4', '5', '6']
+    args = sys.argv[1:]
 
-    pass
+    framework_path = 'frameworks/ex.json' #provide full path if not working
+    arg_id = '0'
+    
+    if len(args) == 0:
+        pass
+    else:
+        framework_path, arg_id = handle_cli_call(args)
+    
+
+    try:
+        credulous_acceptance_from_file(framework_path, arg_id)
+    except Exception as e:
+        print(f"Error: {e}")
+        sys.exit(1)
