@@ -38,6 +38,8 @@ if __name__ == '__main__':
     # Example usage
     argumentation_str = "AF F = ({a, b, c, d, e, k}, {(e, d), (d, b), (b, a), (c, b), (a, k)})"
     # AF F = ({a, b, c, d, e}, {(a, b), (c, b), (c, d), (d, c), (d, e), (e, e)})
+    # AF F = ({a, b, c, d, e}, {(a, b), (c, b), (c, d), (d, c), (d, e), (e, e)})
+    # AF F = ({a, b, c, d, e}, {(a, b), (b, a), (b, c), (c, d), (d, e), (e, c)})
     output_file = "frameworks/output.json"
     argumentation_str = input("Provide the argumentation framework string")
     output_file = input("Provide output file name")
