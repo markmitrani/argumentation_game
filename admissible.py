@@ -30,7 +30,7 @@ def is_defended(element, set_, framework):
     # return False
 
 
-def find_admissible_sets(sets, framework):
+def get_admissible_sets(sets, framework):
     admissible_sets = set()
 
     # Determine admissibility for each set
@@ -47,6 +47,6 @@ if __name__ == '__main__':
     sets = {frozenset({"0"})}
     #sets = {frozenset({"0", "2"}), frozenset({"0"}),frozenset({"0","3"})}
     framework = {'0': {'attacks': ['1'], 'attacked': []}, '1': {'attacks': [], 'attacked': ['0', '2']}, '2': {'attacks': ['1', '3'], 'attacked': ['3']}, '3': {'attacks': ['2', '4'], 'attacked': ['2']}, '4': {'attacks': ['4'], 'attacked': ['3', '4']}}
-    admissible_sets = find_admissible_sets(sets, framework)
+    admissible_sets = get_admissible_sets(sets, framework)
     print(admissible_sets)
 
