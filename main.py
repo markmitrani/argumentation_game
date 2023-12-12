@@ -64,9 +64,6 @@ def main():
     prefset = get_preferred_extension(framework, init_arg)
     print(prefset)
 
-    if len(prefset)>0:
-        defendable = True
-
     # necessary structures:
     ## args_player: list of player's arguments
     ## args_computer: list of computer's arguments
@@ -79,26 +76,25 @@ def main():
     game_continues = True
     while(game_continues):
         if not attackers_comp:
-            print("You have no choices, player! You suck!")
+            print("You have no more choices left, player!")
             win = "computer"
             break
         print("Player, here are your choices: ")
         print_arguments_with_id(framework, attackers_comp)
         player_choice = input("Please type the number of your chosen argument: ")
         if player_choice in args_player:
-            print("You used this argument before, idiot!")
+            print("You used this argument before, player!")
             win = "computer"
             break
         if player_choice in args_computer:
-            print("The computer used this argument before.")
-            print("Idiot computer loses")
+            print("You used an argument that was used by the computer before!")
             win = "player"
             break
         args_player.add(player_choice)
 
         attackers_player = find_attackers(framework, player_choice)
 
-        # TODO the brain of the computer
+        ## the brain of the computer
         computer_choices = []
         # this for loop eliminates the choices already made by the player
         for x in attackers_player:
@@ -106,13 +102,12 @@ def main():
                 computer_choices.append(x)
 
         computer_preferred_choices = []
-        # TODO if any argument in real choices is in pref. extension, pick that
+        # if any argument in real choices is in pref. extension, pick that
         for arg in computer_choices:
             if any(arg in s for s in prefset):
                 computer_preferred_choices.append(arg)
 
-
-        # !!! if the computer doesn't have any choices not already made by the player, they lose
+        # if the computer doesn't have any choices not already made by the player, they lose
         if not computer_choices:
             print("The computer can make no more moves, you win!")
             win = "player"
@@ -136,9 +131,9 @@ def main():
         attackers_comp = find_attackers_of_set(framework, args_computer).difference(args_player)
 
     if win == "player":
-        print("Congratulations! You won! You're amazing!!!")
-    if win == "computer":
-        print("Congratulations! You lost! You're terrible!!!")
+        print("===THE PLAYER WINS===")
+    elif win == "computer":
+        print("===THE COMPUTER WINS===")
 
     # round loop: check if player can make attacks.
     ## after player has made their move, check if their argument was used by computer before
