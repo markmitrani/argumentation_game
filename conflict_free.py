@@ -24,7 +24,7 @@ def is_conflict_free(subset, framework):
             return False
     return True
 
-def conflict_free_sets_containing_arg(framework):
+def get_conflict_free_sets(framework):
     """ Find all conflict-free sets containing the specified argument. """
     all_args = set(framework.keys())
     conflict_free_sets = set()
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     print(is_conflict_free(("1","4"), framework))
 
     print("Conflict-free sets containing the argument:")
-    cf_set = conflict_free_sets_containing_arg(framework, '1')
+    cf_set = get_conflict_free_sets(framework, '1')
 
     print(cf_set)
 

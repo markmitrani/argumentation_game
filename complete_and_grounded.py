@@ -19,9 +19,8 @@ def get_grounded_sets(framework, complete_sets):
     # All the sets that are subsets of all the other sets
     grounded_sets= set()
     for set_ in complete_sets:
-        if all(set_ <= other_set for other_set in complete_sets):
+        if not any(other_set <= set_ for other_set in complete_sets):
             grounded_sets.add(set_)
-
 
     return grounded_sets
     
