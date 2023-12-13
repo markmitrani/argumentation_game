@@ -7,6 +7,7 @@ def is_defended(element, set_, framework):
     if len(attackers) == 0:
         return True
 
+    defended_from_all = True
     for attacker in attackers:
         # Check if the attacker is in the set
         # if attacker in set_:
@@ -15,9 +16,11 @@ def is_defended(element, set_, framework):
         
         # Check if another node within the set attacks the attacker
         if any(attacker in framework[element]['attacks'] for element in set_):
-            return True  
+            pass
+        else:
+            defended_from_all = False
 
-    return False
+    return defended_from_all
 
     # # An element defends itself if it attacks someone outside the set
     # if any(target not in set_ for target in framework[element]['attacks']):
@@ -37,7 +40,7 @@ def get_admissible_sets(sets, framework):
     for set_ in sets:
 
         # Check if each element is defended
-        if all(is_defended(element, set_, framework) for element in set_):
+        if all(is_defended(element, set_, framework) for element in set_): # if set is empty, this will still return True
             admissible_sets.add(set_)
 
     return admissible_sets

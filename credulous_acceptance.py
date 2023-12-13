@@ -112,7 +112,7 @@ def credulous_acceptance(framework, argument = None, labels = None):
     print(complete_sets)
     is_arg_contained = argument_contained(complete_sets, argument)
     for argument in arguments:
-        is_arg_contained = argument_contained(preferred_sets, argument)
+        is_arg_contained = argument_contained(complete_sets, argument)
         arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
         if is_arg_contained:
             print(f"{arg_str} is credously accepted w.r.t. the complete semantics")
@@ -121,11 +121,11 @@ def credulous_acceptance(framework, argument = None, labels = None):
 
     print("-"*50)
     print("Grounded sets:")
-    grounded_set = get_grounded_sets(framework, complete_sets)
-    print(grounded_set)
-    is_arg_contained = argument_contained(grounded_set, argument)
+    grounded_sets = get_grounded_sets(framework, complete_sets)
+    print(grounded_sets)
+    is_arg_contained = argument_contained(grounded_sets, argument)
     for argument in arguments:
-        is_arg_contained = argument_contained(preferred_sets, argument)
+        is_arg_contained = argument_contained(grounded_sets, argument)
         arg_str = labels[argument]+f" (id: {argument})" if labels is not None else argument
         
         if is_arg_contained:
@@ -218,7 +218,7 @@ def handle_cli_call(args):
 if __name__ == '__main__':
     args = sys.argv[1:]
 
-    framework_path = 'frameworks/ex.json' #provide full path if not working
+    framework_path = 'frameworks/example_2.json' #provide full path if not working
     arg_id = '0'
     
     if len(args) == 0:
