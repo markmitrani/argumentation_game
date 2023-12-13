@@ -133,26 +133,52 @@ def credulous_acceptance(framework, argument = None, labels = None):
         else:
             print(f"{arg_str} is not credously accepted w.r.t. the grounded semantics")
 
-def credulous_acceptance_from_file(path_to_framework, argument = None, include_labels = True):
+def credulous_acceptance_from_file(path_to_framework, argument=None, include_labels=True):
+    """
+    Load an argumentation framework from a JSON file and perform credulous acceptance.
 
+    Args:
+        path_to_framework (str): The path to the JSON file containing the argumentation framework.
+        argument (str, optional): The specific argument to evaluate for credulous acceptance. Defaults to None.
+        include_labels (bool, optional): Whether to include labels for the arguments in the framework. Defaults to True.
+
+    Raises:
+        Exception: If the provided JSON file does not exist or is not a valid JSON file.
+
+    Returns:
+        None
+
+    Example JSON format:
+    {
+        "Arguments": {
+            "0": "We should go to the cinema.",
+            "1": "We should go to the gym.",
+            "2": "The gym is better for the health than the cinema.",
+            "3": "We have no time for evening activities, since there is an exam coming up.",
+            "4": "The exam is in a few weeks.",
+            "5": "We have no money for cinema or gym.",
+            "6": "We just got our salaries."
+        },
+        "Attack Relations": [
+            ["0","1"], ["1","0"], ["2","0"],
+            ["3","0"], ["3","1"], ["4","3"],
+            ["5","0"], ["5","1"], ["6","5"]
+        ]
+    }
+    """
     if not os.path.exists(path_to_framework):
-        raise("Please enter a valid json file, the file you provided does not exist.")
+        raise Exception("Please enter a valid JSON file, the file you provided does not exist.")
     if not path_to_framework.endswith(".json"):
-        raise("Please enter a valid json file, the file you provided is not a json file.")
+        raise Exception("Please enter a valid JSON file, the file you provided is not a JSON file.")
     
-    # load json
+    # load JSON
     with open(path_to_framework, "r") as file:
         input_data = json.load(file)
-        #print(type(input_data))
-        #print(input_data)
-        #print("Argumentation framework loaded.")
 
-    # Convert the dictionary to have the attackers and attacked for each argument
-    # 
-        
     if include_labels:
+        # perform credulous acceptance
         if "Arguments" not in input_data:
-            raise("Please enter a valid json file with Arguments key")
+            raise Exception("Please enter a valid json file with Arguments key")
         labels = input_data["Arguments"]
 
     framework = convert_data_structure(input_data)
