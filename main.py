@@ -27,10 +27,10 @@ def find_attackers(framework, arg_id):
 
 def get_preferred_extension(framework, init_arg):
     framework_alt = graph.convert_data_structure(framework)
-    cf_sets = conflict_free.conflict_free_sets_containing_arg(framework_alt)
+    cf_sets = conflict_free.get_conflict_free_sets(framework_alt)
     cf_sets_with_arg = (item for item in cf_sets if init_arg in item)
-    admissible_sets_with_arg = admissible.find_admissible_sets(cf_sets_with_arg, framework_alt)
-    preferred_sets_with_arg = preferred.find_preferred_sets(admissible_sets_with_arg)
+    admissible_sets_with_arg = admissible.get_admissible_sets(cf_sets_with_arg, framework_alt)
+    preferred_sets_with_arg = preferred.get_preferred_sets(admissible_sets_with_arg)
     return preferred_sets_with_arg
 
 
@@ -49,7 +49,8 @@ def main():
     # load json
     with open("frameworks/"+filename, "r") as file:
         framework = json.load(file)
-        print(type(framework))
+        #print(type(framework))
+        print("Framework chosen:")
         print(framework)
         print("Argumentation framework loaded.")
 
@@ -58,7 +59,17 @@ def main():
     # get input argument
     round_cnt = 0
     print("ROUND",round_cnt)
-    init_arg = input("Please type the number of the initial argument the computer should claim: ")
+
+    # input checking
+    invalid_input = True
+    while(invalid_input): 
+        init_arg = input("Please type the number of the initial argument the computer should claim: ")
+        if init_arg in framework["Arguments"]:
+            invalid_input = False
+        else:
+            print("Please enter a valid argument number.")
+    #/ input checking
+
 
     # Check if Preferred Extension exists
     prefset = get_preferred_extension(framework, init_arg)
@@ -81,7 +92,17 @@ def main():
             break
         print("Player, here are your choices: ")
         print_arguments_with_id(framework, attackers_comp)
-        player_choice = input("Please type the number of your chosen argument: ")
+
+        # input checking
+        invalid_input = True
+        while(invalid_input):
+            player_choice = input("Please type the number of your chosen argument: ")
+            if player_choice in framework["Arguments"]:
+                invalid_input = False
+            else:
+                print("Please enter a valid argument number.")
+        #/ input checking
+
         if player_choice in args_player:
             print("You used this argument before, player!")
             win = "computer"
