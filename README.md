@@ -16,8 +16,7 @@ their choice, the user must type the corresponding index
 The credulous decision problem can be answered for any framework calling the
 credulous acceptance.py script running a command following the format:
 python credulous acceptance.py FULL PATH TO FRAMEWORK ARGUMENT IDENTIFIER.
-The JSON framework should be given in the standard format, since it will be automati-
-cally converted to our representation. The same file can also be run manually and the ar-
+The JSON framework should be given in the standard format, since it will be automatically converted to our representation. The same file can also be run manually and the ar-
 guments can be specified modifying the variables framework path and framework path
 directly, under the if name == ’ main ’: line.
 Ultimately, the credulous acceptance procedure can also be tested automatically on
